@@ -35,12 +35,12 @@ export default function Home() {
 
   async function apiURL () {
 
-    const userCredentials = {
-        user: {
-            email: "lucascovatti@hotmail.com",
-            password: "lucas123",
-        },
-    };
+    // const userCredentials = {
+    //     user: {
+    //         email: "lucascovatti@hotmail.com",
+    //         password: "lucas123",
+    //     },
+    // };
 
     // const response = await fetch('https://dev-api.savebiking.com/api/v1/login', {
 
@@ -60,21 +60,21 @@ export default function Home() {
      const userCredentials = JSON.stringify({
         user: {
           email: "lucascovatti@hotmail.com",
-          password: "lucas123"
+          password: "lucas123",
         },
      })
-      const response = fetch("https://dev-api.savebiking.com/api/v1/login", {
-          method: "POST",
-          mode: 'no-cors',
-          headers: {  
-              'Accept': 'application/json, text/plain, */*',
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify(userCredentials)
-      })
-      .then(res => {
-        console.log(res)
-      })
+      // const response = fetch("https://dev-api.savebiking.com/api/v1/login", {
+      //     method: "POST",
+      //     mode: 'cors',
+      //     headers: {  
+      //         'Accept': 'application/json, text/plain, */*',
+      //        'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify(userCredentials)
+      // })
+      // .then(res => {
+      //   console.log(res)
+      // })
  
    // https://api.savebiking.com/api/v1/login
 
@@ -94,38 +94,24 @@ export default function Home() {
       
 
 
-    // var aux =   {"user":{"email":"lucascovatti@hotmail.com","password":"lucas123"}}
-    // var data = new FormData();
-    // //data.append("text",aux )
-    //    data.append( "json", JSON.stringify( userCredentials ) );
-    //     fetch("https://dev-api.savebiking.com/api/v1/login",
-    //     {
-    //         method: "POST",
-    //         body: data
-    //     })
-    //     .then(function(res){
-    //       console.log("res", res)
-    //       return res.json(); 
-    //     })
-    //     .then(function(data){ console.log(data)  })
-    // axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
-    // axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-    // axios.defaults.headers.post['mode'] = 'no-cors';
-    //        axios({
-    //   method: 'POST',
-    //   url: 'https://api.savebiking.com/api/v1/login',
-    //   data: userCredentials,
-    // })
-    //   .then((response) => {
-    //     handleServerResponse(
-    //       true,
-    //       'Thank you, your message has been submitted.',
-    //     );
-    //   })
-    //   .catch((error) => {
-    //     handleServerResponse(false, error.response.data.error);
-    //   });
+    var aux =   {"user":{"email":"lucascovatti@hotmail.com","password":"lucas123"}}
+    var data = new FormData();
+    data.append("headers",  "' 'Content-Type': 'application/json'" )
+       data.append( "json",  '"email":"lucascovatti@hotmail.com","password":"lucas123"' );
+       console.log("eqweqwee ",data)
+        fetch("https://dev-api.savebiking.com/api/v1/login",
+        {
+            method: "POST",
+            body: data
+        })
+        .then(function(res){
+          console.log("res", res)
+          return res.json(); 
+        })
+        .then(function(data){ console.log(data)  })
+    
 
+ 
 
   }
 
