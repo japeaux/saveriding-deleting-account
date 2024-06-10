@@ -57,21 +57,20 @@ export default function Home() {
 
 
 
-    const data = {
-      user: {
-        email: "lucascovatti@hotmail.com",
-        password: "lucas123"
-      }
-      };
-      
-      const response = fetch("https://api.savebiking.com/api/v1/login", {
+     const userCredentials = JSON.stringify({
+        user: {
+          email: "lucascovatti@hotmail.com",
+          password: "lucas123"
+        },
+     })
+      const response = fetch("https://dev-api.savebiking.com/api/v1/login", {
           method: "POST",
           mode: 'no-cors',
           headers: {  
               'Accept': 'application/json, text/plain, */*',
               "Content-Type": "application/json"
           },
-          body: JSON.stringify(data)
+          body: JSON.stringify(userCredentials)
       })
       .then(res => {
         console.log(res)
@@ -291,7 +290,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://saveriding.com">SaveRiding</a> deleting account
+          qweqeqwe to <a href="https://saveriding.com">SaveRiding</a> deleting account
         </h1>
         
 
@@ -301,7 +300,7 @@ export default function Home() {
 
         <form onSubmit={handleOnSubmit}>
         <p className={styles.description}>
-          Email
+          Eqweqwemail
         </p>
 
         <input
