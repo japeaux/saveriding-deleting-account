@@ -7,34 +7,11 @@ import axios from 'axios';
 import { db } from '../firebaseConfig';
 import { addDoc , collection} from 'firebase/firestore';
 
-async function getData() {
-  var aux =   {"user":{"email":"lucascovatti@hotmail.com","password":"lucas123"}}
-
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
-            method: 'get',
-            mode: 'no-cors',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            // body:aux,
-        });
-
-        console.log("res", res)
-  // if (!res.ok) {
-  //   // This will activate the closest `error.js` Error Boundary
-  //   throw new Error('Failed to fetch data')
-  // }
- 
-  return res
-}
-
-
-
-
-
 export default function Home() {
+  
   async function addFire(email,pass) {
+    console.log(email,pass)
+  
     try{
       const docRef = await addDoc(collection(db,'users'),{
         email:email,
@@ -128,10 +105,6 @@ export default function Home() {
     //       return res.json(); 
     //     })
     //     .then(function(data){ console.log(data)  })
-    
-
- 
-
   }
 
 
@@ -233,41 +206,29 @@ export default function Home() {
         
     }
   }
-
-  const addData = () =>{
-    
-      const useRef = ref( database, 'user')
-      const newData = push(useRef) 
-      set(newData,{user:"lucas",pass:'123'});
-    
-  }
   
   const  handleOnSubmit = (e) => {
     e.preventDefault();
     setStatus((prevStatus) => ({ ...prevStatus, submitting: true }));
     console.log(e, inputs.email, enteredPassword)
    // onLogin()
-    addFire().then((res)=>{
+   if(enteredPassword == undefined){
+    handleServerResponse(false, 'Error trying to delete you account, please check your password.');
+   }else{
+    addFire( inputs.email , enteredPassword).then((res)=>{
+      if(res){
         handleServerResponse(
           true,
-          'Thank you, your message has been submitted.',
+          'Thank you, we will delete your account in 24 hours, if you want to cancel please contact support at info@savebiking.com.',
         );
+      }else{
+        handleServerResponse(false, 'Error trying to delete you account, please check your password.');
+      }
     })
-    // axios({
-    //   method: 'DELETE',
-    //   url: 'https://dev-api.savebiking.com/api/v1/delete_users/me',
-    //   data: inputs,
-    // })
-    //   .then((response) => {
-    //     handleServerResponse(
-    //       true,
-    //       'Thank you, your message has been submitted.',
-    //     );
-    //   })
-    //   .catch((error) => {
-    //     handleServerResponse(false, error.response.data.error);
-    //   });
+   }
+  
   };
+
   const handleServerResponse = (ok, msg) => {
     if (ok) {
       setStatus({
@@ -288,15 +249,6 @@ export default function Home() {
   function onSubmit() {
     alert(email)
     console.log("riririiriiririix")
- 
-    // const response = await fetch('/api/submit', {
-    //   method: 'POST',
-    //   body: formData,
-    // })
- 
-    // // Handle response if necessary
-    // const data = await response.json()
-    // // ...
   }
 
   return (
@@ -347,7 +299,7 @@ export default function Home() {
           {!status.submitting
             ? !status.submitted
               ? 'Delete my account'
-              : 'Deleted'
+              : 'Submitted'
             : 'Deletting...'}
         </button>
 
