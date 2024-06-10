@@ -52,54 +52,46 @@ export default function Home() {
     //   body: userCredentials,
     // })
     // console.log(response)
-    // // const responseData = await response.json()
-    // // console.log(responseData, "AIOIAJIOJOIA")
+    // const responseData = await response.json()
+    // console.log(responseData, "AIOIAJIOJOIA")
 
 
 
-    // const data = {
-    //   user: {
-    //     email: "lucascovatti@hotmail.com",
-    //     password: "lucas123"
-    //   }
-    //   };
+    const data = {
+      user: {
+        email: "lucascovatti@hotmail.com",
+        password: "lucas123"
+      }
+      };
       
-    //   const response = fetch("https://dev-api.savebiking.com/api/v1/login", {
-    //       method: "POST",
-    //       mode: 'no-cors',
-    //       headers: {
-    //           "Content-Type": "application/json"
-    //       },
-    //       body: JSON.stringify(data)
-    //   })
-    //   .then(res => {
-    //       if (!res.ok) {
-    //           throw new Error('Network response was not ok ' + res.statusText);
-    //       }
-    //       return res.json();
-    //   })
-    //   .then(data => {
-    //       console.log(data);
-    //   })
-    //   .catch(error => {
-    //       console.error('There was a problem with your fetch operation:', error);
-    //   });
-
-    fetch('https://dev-api.savebiking.com/api/v1/login', {
-            method: 'POST',
-            mode:'no-cors',
-            headers: {
+      const response = fetch("https://api.savebiking.com/api/v1/login", {
+          method: "POST",
+          mode: 'no-cors',
+          headers: {  
               'Accept': 'application/json, text/plain, */*',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({user: {
-                  email: "lucascovatti@hotmail.com",
-                  password: "lucas123"
-                }})
-          }).then(function(res){
-                  console.log("res", res)
-                  //eturn res.json(); 
-                })
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+      })
+      .then(res => {
+        console.log(res)
+      })
+ 
+   // https://api.savebiking.com/api/v1/login
+
+    // fetch('https://api.savebiking.com/api/v1/login', {
+    //         method: 'POST',
+    //         mode:'no-cors',
+    //         headers: {
+    //           'Access-Control-Allow-Origin': '*',
+    //           'Accept': 'application/json, text/plain, */*',
+    //           'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify( userCredentials )
+    //       }).then(function(res){
+    //               console.log("reswwww", res)
+    //               //eturn res.json(); 
+    //             })
       
 
 
@@ -117,6 +109,23 @@ export default function Home() {
     //       return res.json(); 
     //     })
     //     .then(function(data){ console.log(data)  })
+    // axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
+    // axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    // axios.defaults.headers.post['mode'] = 'no-cors';
+    //        axios({
+    //   method: 'POST',
+    //   url: 'https://api.savebiking.com/api/v1/login',
+    //   data: userCredentials,
+    // })
+    //   .then((response) => {
+    //     handleServerResponse(
+    //       true,
+    //       'Thank you, your message has been submitted.',
+    //     );
+    //   })
+    //   .catch((error) => {
+    //     handleServerResponse(false, error.response.data.error);
+    //   });
 
 
   }
@@ -178,6 +187,7 @@ export default function Home() {
       method: "POST",
       mode: 'no-cors',
       headers: {
+        'Access-Control-Allow-Origin': '*',
         Accept: "application/json",
         "Content-Type": "application/json; charset=utf8",
       },
