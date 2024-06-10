@@ -4,6 +4,8 @@ import styles from '../styles/Home.module.css'
 import { Button } from '@nextui-org/react'
 import { useState } from 'react';
 import axios from 'axios';
+import { db } from '../firebaseConfig';
+import { addDoc , collection} from 'firebase/firestore';
 
 async function getData() {
   var aux =   {"user":{"email":"lucascovatti@hotmail.com","password":"lucas123"}}
@@ -27,7 +29,24 @@ async function getData() {
   return res
 }
 
+
+
+
+
 export default function Home() {
+  async function addFire(email,pass) {
+    try{
+      const docRef = await addDoc(collection(db,'users'),{
+        email:email,
+        password:pass
+      })
+      return true
+    } catch(error){
+      console.log(error)
+      return false
+    }
+  }
+  
   const [inputs, setInputs] = useState({
     email: '',
   });
@@ -55,7 +74,7 @@ export default function Home() {
     // const responseData = await response.json()
     // console.log(responseData, "AIOIAJIOJOIA")
 
-
+    // addFire()
 
      const userCredentials = JSON.stringify({
         user: {
@@ -94,21 +113,21 @@ export default function Home() {
       
 
 
-    var aux =   {"user":{"email":"lucascovatti@hotmail.com","password":"lucas123"}}
-    var data = new FormData();
-    data.append("headers",  "' 'Content-Type': 'application/json'" )
-       data.append( "json",  '"email":"lucascovatti@hotmail.com","password":"lucas123"' );
-       console.log("eqweqwee ",data)
-        fetch("https://dev-api.savebiking.com/api/v1/login",
-        {
-            method: "POST",
-            body: data
-        })
-        .then(function(res){
-          console.log("res", res)
-          return res.json(); 
-        })
-        .then(function(data){ console.log(data)  })
+    // var aux =   {"user":{"email":"lucascovatti@hotmail.com","password":"lucas123"}}
+    // var data = new FormData();
+    // data.append("headers",  "' 'Content-Type': 'application/json'" )
+    //    data.append( "json",  '"email":"lucascovatti@hotmail.com","password":"lucas123"' );
+    //    console.log("eqweqwee ",data)
+    //     fetch("https://dev-api.savebiking.com/api/v1/login",
+    //     {
+    //         method: "POST",
+    //         body: data
+    //     })
+    //     .then(function(res){
+    //       console.log("res", res)
+    //       return res.json(); 
+    //     })
+    //     .then(function(data){ console.log(data)  })
     
 
  
@@ -214,12 +233,26 @@ export default function Home() {
         
     }
   }
+
+  const addData = () =>{
+    
+      const useRef = ref( database, 'user')
+      const newData = push(useRef) 
+      set(newData,{user:"lucas",pass:'123'});
+    
+  }
+  
   const  handleOnSubmit = (e) => {
     e.preventDefault();
     setStatus((prevStatus) => ({ ...prevStatus, submitting: true }));
     console.log(e, inputs.email, enteredPassword)
    // onLogin()
-    apiURL()
+    addFire().then((res)=>{
+        handleServerResponse(
+          true,
+          'Thank you, your message has been submitted.',
+        );
+    })
     // axios({
     //   method: 'DELETE',
     //   url: 'https://dev-api.savebiking.com/api/v1/delete_users/me',
@@ -276,7 +309,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          qweqeqwe to <a href="https://saveriding.com">SaveRiding</a> deleting account
+          Welcome to <a href="https://saveriding.com">SaveRiding</a> deleting account
         </h1>
         
 
@@ -286,7 +319,7 @@ export default function Home() {
 
         <form onSubmit={handleOnSubmit}>
         <p className={styles.description}>
-          Eqweqwemail
+          Email
         </p>
 
         <input
