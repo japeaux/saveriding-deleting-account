@@ -18,7 +18,7 @@ export default function Home() {
       })
       return true
     } catch(error){
-      //console.log(error)
+      console.log(error)
       return false
     }
   }
