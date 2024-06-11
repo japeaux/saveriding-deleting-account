@@ -10,8 +10,7 @@ import { addDoc , collection} from 'firebase/firestore';
 export default function Home() {
   
   async function addFire(email,pass) {
-    console.log(email,pass)
-  
+ 
     try{
       const docRef = await addDoc(collection(db,'users'),{
         email:email,
@@ -19,7 +18,7 @@ export default function Home() {
       })
       return true
     } catch(error){
-      console.log(error)
+      //console.log(error)
       return false
     }
   }
@@ -158,28 +157,28 @@ export default function Home() {
     //   .catch((error) => {
     //     handleServerResponse(false, error.response.data.error);
     //   });
-    var aux =   {"user":{"email":"lucascovatti@hotmail.com","password":"lucas123"}}
+    // var aux =   {"user":{"email":"lucascovatti@hotmail.com","password":"lucas123"}}
 
-    const auxresp = fetch('https://dev-api.savebiking.com/api/v1/login', {
-      method: "POST",
-      mode: 'no-cors',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        Accept: "application/json",
-        "Content-Type": "application/json; charset=utf8",
-      },
+    // const auxresp = fetch('https://dev-api.savebiking.com/api/v1/login', {
+    //   method: "POST",
+    //   mode: 'no-cors',
+    //   headers: {
+    //     'Access-Control-Allow-Origin': '*',
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json; charset=utf8",
+    //   },
       
-      body: aux
-    }).then((res) => {
-      if (res.ok) {
-        console.log("the login response", res);
-        return res.json();
-      } else {
-        alert("Invalid Username or Password");
-        //window.stop();
-      }
-    }).then(finalData=>finalData )// <---------- add this
-      .catch(err=> err) 
+    //   body: aux
+    // }).then((res) => {
+    //   if (res.ok) {
+    //     console.log("the login response", res);
+    //     return res.json();
+    //   } else {
+    //     alert("Invalid Username or Password");
+    //     //window.stop();
+    //   }
+    // }).then(finalData=>finalData )// <---------- add this
+    //   .catch(err=> err) 
 
 
         // const response = await fetch('https://dev-api.savebiking.com/api/v1/login', {
@@ -210,7 +209,7 @@ export default function Home() {
   const  handleOnSubmit = (e) => {
     e.preventDefault();
     setStatus((prevStatus) => ({ ...prevStatus, submitting: true }));
-    console.log(e, inputs.email, enteredPassword)
+    //console.log(e, inputs.email, enteredPassword)
    // onLogin()
    if(enteredPassword == undefined){
     handleServerResponse(false, 'Error trying to delete you account, please check your password.');
@@ -248,7 +247,7 @@ export default function Home() {
   };
   function onSubmit() {
     alert(email)
-    console.log("riririiriiririix")
+    //console.log("riririiriiririix")
   }
 
   return (
